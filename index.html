@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lunard（ルナール）</title>
+<meta name="description" content="Lunard（ルナール）— サロンの数字と、お店の顔をつくる。売上分析AI「Salon Adviser」の開発と、店舗の公式サイト制作。">
+<link rel="canonical" href="https://tagyukidaruru-cloud.github.io/lunard/">
+
+<!-- ファビコン（SVG優先・非対応ブラウザはPNGへフォールバック） -->
+<link rel="icon" type="image/svg+xml" href="assets/Lunard_mark.svg">
+<link rel="icon" type="image/png" href="assets/Lunard_mark.png">
+
+<!-- SNSシェア時の見え方（OGP / Twitter Card）
+     画像はブランド正本ロゴから生成した assets/ogp.png（1200×630）。
+     og:url / og:image は絶対URLでないとSNS側が解決できないため公開URLを直書きしている。 -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lunard">
+<meta property="og:title" content="Lunard（ルナール）">
+<meta property="og:description" content="お店と会社の、数字と見た目をつくる。売上分析AI「Salon Adviser」の開発と、公式サイト制作。">
+<meta property="og:url" content="https://tagyukidaruru-cloud.github.io/lunard/">
+<meta property="og:image" content="https://tagyukidaruru-cloud.github.io/lunard/assets/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lunard（ルナール）">
+<meta name="twitter:description" content="お店と会社の、数字と見た目をつくる。売上分析AI「Salon Adviser」の開発と、公式サイト制作。">
+<meta name="twitter:image" content="https://tagyukidaruru-cloud.github.io/lunard/assets/ogp.png">
+
+<style>
+/* ============================================================
+   Lunard 公式サイト
+   単一HTML・外部依存ゼロ（Webフォント／CDN／解析タグを読み込まない）
+   ブランド正本: 資料/ブランド_Lunard/Lunard_brand.md
+   ============================================================ */
+
+/* ---------- デザイントークン ---------- */
+:root{
+  --cream:#FAF8F4;      /* 背景（生成り） */
+  --ink:#2A2724;        /* 本文・見出しの文字色（墨色） */
+  --bordeaux:#6B2D35;   /* ブランドカラー。小見出しとリンクのみに使う */
+  --gray:#8A857E;       /* 読み仮名・キャプション等の副次文字 */
+  --line:#E5E0D8;       /* セクション境界の罫線 */
+}
+
+/* ---------- ベース ---------- */
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--cream); color:var(--ink);
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+  line-height:1.9; -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- レイアウト ---------- */
+/* 全セクション共通の内側コンテナ。本文幅は760pxで固定 */
+.wrap{max-width:760px; margin:0 auto; padding:0 28px;}
+
+/* セクションは上罫線で区切る（ヒーローには付かない） */
+section{padding:64px 0; border-top:1px solid var(--line);}
+/* セクション見出し = 極小・大字間・ボルドー */
+h2{font-size:12px; letter-spacing:.42em; color:var(--bordeaux); font-weight:400; margin:0 0 36px; padding-left:.42em;}
+
+/* ---------- ヒーロー ---------- */
+header{padding:110px 0 90px; text-align:center;}
+h1.logo{margin:0 0 16px;}
+h1.logo img{width:290px; max-width:72vw; height:auto; display:block; margin:0 auto;}
+/* padding-left は字間で右にずれる分の光学補正（末尾の字間を打ち消す） */
+.read{font-size:11px; letter-spacing:.55em; color:var(--gray); margin:0 0 40px; padding-left:.55em;}
+.tagline{font-size:20px; letter-spacing:.08em; margin:0;}
+.sub{font-size:14px; color:var(--gray); margin:16px 0 0; letter-spacing:.04em;}
+
+/* ---------- 事業 ---------- */
+.biz{margin-bottom:44px;}
+.biz:last-child{margin-bottom:0;}
+.biz h3{font-size:19px; letter-spacing:.06em; margin:0 0 4px; font-weight:400;}
+.biz .en{font-family:Didot,"Bodoni 72","Times New Roman",serif; font-size:11px; letter-spacing:.3em; color:var(--gray); margin:0 0 14px;}
+.biz p{margin:0 0 14px; font-size:15px;}
+.link{display:inline-block; font-size:13px; letter-spacing:.1em; color:var(--bordeaux); text-decoration:none; border-bottom:1px solid rgba(107,45,53,.35); padding-bottom:2px;}
+.link:hover{border-bottom-color:var(--bordeaux);}
+
+/* ---------- 代表 ---------- */
+dl.profile{margin:0; font-size:15px;}
+dl.profile dt{font-size:11px; letter-spacing:.3em; color:var(--gray); margin:0 0 4px;}
+dl.profile dd{margin:0 0 22px;}
+dl.profile dd:last-child{margin-bottom:0;}
+
+/* ---------- お問い合わせ ---------- */
+.contact p{font-size:15px; margin:0 0 18px;}
+.mail{font-family:Didot,"Bodoni 72","Times New Roman",serif; font-size:18px; letter-spacing:.06em; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px;}
+.mail:hover{border-bottom-color:var(--bordeaux);}
+
+/* ---------- フッター ---------- */
+footer{padding:52px 0 64px; text-align:center; border-top:1px solid var(--line);}
+footer .fm{font-family:Didot,"Bodoni 72","Times New Roman",serif; font-size:15px; letter-spacing:.3em; color:var(--gray);}
+footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:10px;}
+
+/* ============================================================
+   オープニング演出（月と、月光の狐）
+   夜空＋星屑 → 月 → 狐マーク → ワードマーク → 本編へ
+   リロードのたびに毎回再生する（抑制しない・CEO指示）
+   タイムライン: 月0.25s / マーク1.05s / ワード1.9s / 退場3.1s / 解除4.1s
+   ============================================================ */
+#opening{
+  position:fixed; inset:0; z-index:9999; overflow:hidden;
+  background:radial-gradient(120% 90% at 62% 22%, #1B1D2A 0%, #101119 45%, #08080D 100%);
+  display:flex; align-items:center; justify-content:center;
+  animation:op-out .9s ease 3.1s forwards;
+}
+/* 星屑（JSで描画・全面） */
+#stars{position:absolute; inset:0; width:100%; height:100%;}
+/* 月（JSで描画。box-shadow は月あかりのにじみ） */
+.moon{
+  position:absolute; top:14%; left:62%; width:132px; height:132px; border-radius:50%;
+  box-shadow:
+    0 0 46px 10px rgba(250,245,228,.24),
+    0 0 120px 40px rgba(226,217,192,.13),
+    0 0 240px 96px rgba(196,188,164,.06);
+  opacity:0; transform:translateY(-14px) scale(.94);
+  animation:moon-in 1.7s cubic-bezier(.22,.7,.3,1) .25s forwards;
+}
+.op-stage{position:relative; text-align:center; z-index:2;}
+/* 狐イラスト（CEO承認: ペアP1＝S3眠る＋S1見上げる／輪郭グロー二段R3b）。
+   fox_pair_P1.svg は横長（viewBox比 約1.77:1）なので幅は狐尻マーク時より広くとる。
+   margin:0 auto ＋ 親 .op-stage の text-align:center で画面中央に揃う（幅に依存せず中央）。 */
+.op-mark{
+  width:240px; margin:0 auto 26px; opacity:0; transform:scale(.9);
+  animation:mark-in 1.6s cubic-bezier(.22,.7,.3,1) 1.05s forwards;
+}
+.op-mark img{width:100%; height:auto; display:block;
+  filter:drop-shadow(0 0 16px rgba(245,238,216,.30)) drop-shadow(0 0 44px rgba(200,190,160,.16));}
+.op-word{
+  width:210px; margin:0 auto; opacity:0;
+  animation:word-in 1.3s ease 1.9s forwards;
+}
+.op-word img{width:100%; height:auto; display:block; opacity:.92;}
+.op-skip{
+  position:absolute; right:26px; bottom:24px; z-index:3;
+  background:none; border:none; cursor:pointer;
+  font-family:inherit; font-size:10px; letter-spacing:.34em; color:rgba(240,236,226,.45);
+  padding:10px 4px;
+}
+.op-skip:hover{color:rgba(240,236,226,.85);}
+
+@keyframes moon-in{to{opacity:1; transform:translateY(0) scale(1);}}
+@keyframes mark-in{to{opacity:1; transform:scale(1);}}
+@keyframes word-in{to{opacity:1;}}
+@keyframes op-out{to{opacity:0; visibility:hidden;}}
+
+/* 演出中は背面をスクロールさせない／終了後は完全に取り除く */
+body.op-playing{overflow:hidden;}
+body.op-done #opening{display:none;}
+
+/* ============================================================
+   レスポンシブ（スマートフォン）
+   ============================================================ */
+@media(max-width:600px){
+  /* 本編 */
+  header{padding:76px 0 62px;}
+  h1.logo img{width:220px;}
+  .tagline{font-size:17px;}
+  section{padding:48px 0;}
+
+  /* オープニング */
+  .moon{width:86px; height:86px; top:16%; left:58%;}
+  .op-mark{width:200px;}
+  .op-word{width:170px;}
+}
+
+/* モーションを控える設定の人には演出を出さない */
+@media(prefers-reduced-motion:reduce){
+  #opening{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ オープニング演出 ============ -->
+<div id="opening" aria-hidden="true">
+  <canvas id="stars"></canvas>
+  <canvas class="moon" id="moon"></canvas>
+  <div class="op-stage">
+    <div class="op-mark"><img src="assets/fox_pair_P1.svg" alt=""></div>
+    <div class="op-word"><img src="assets/Lunard_logo_reversed.svg" alt=""></div>
+  </div>
+  <button class="op-skip" type="button">SKIP</button>
+</div>
+
+<!-- ============ ヒーロー ============ -->
+<header>
+  <div class="wrap">
+    <h1 class="logo"><img src="assets/Lunard_logo.svg" alt="Lunard"></h1>
+    <p class="read">ルナール</p>
+    <p class="tagline">お店と会社の、数字と見た目をつくる。</p>
+    <p class="sub">現場に立っている人間が、現場でほしかったものを作っています。</p>
+  </div>
+</header>
+
+<!-- ============ 事業 ============ -->
+<section>
+  <div class="wrap">
+    <h2>事業</h2>
+
+    <div class="biz">
+      <h3>Salon Adviser</h3>
+      <p class="en">SALON SALES ANALYSIS AI</p>
+      <p>レジ締め画面の写真を送るだけで、店舗とスタッフ別の売上分析とアドバイスが届く、サロンのためのAIです。面倒な初期設定はありません。</p>
+      <a class="link" href="https://tagyukidaruru-cloud.github.io/salon-adviser-lp/">サービスの詳細を見る</a>
+    </div>
+
+    <div class="biz">
+      <h3>Web制作</h3>
+      <p class="en">WEB PRODUCTION</p>
+      <p>お店や会社の公式サイトを制作しています。美容室、カフェ、不動産——業種は問いません。問い合わせや予約の導線から、日々の更新のしやすさまで、事業を続けるための設計でつくります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 名前について ============ -->
+<section>
+  <div class="wrap">
+    <h2>名前について</h2>
+
+    <div class="biz">
+      <p>Lunard（ルナール）は、月を意味するラテン語「Luna」と、狐を意味するフランス語「renard」を合わせた造語です。狐は、月あかりを頼りに夜を歩く動物。光がなければ迷ってしまう。月明かりで全体を照らすからこそ、迷わず動ける——そのつながりを名前にしました。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 代表 ============ -->
+<section>
+  <div class="wrap">
+    <h2>代表</h2>
+    <dl class="profile">
+      <dt>NAME</dt>
+      <dd>堤田 悠斗（つつみだ ゆうと）</dd>
+      <dt>PROFILE</dt>
+      <dd>美容師。関東のサロンでエリアマネージャーを務めながら、LunardとしてAIの開発とWeb制作をしています。自分が現場に立ち続けているからこそ、机の上で考えた仕組みではなく、店を回している人が本当に困っていることから設計します。業種は問いません。</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ お問い合わせ ============ -->
+<section class="contact">
+  <div class="wrap">
+    <h2>お問い合わせ</h2>
+    <p>サービスのご相談、お見積り、その他のご連絡はメールからお願いいたします。数日以内にご返信します。</p>
+    <a class="mail" href="mailto:lunard.jp@gmail.com">lunard.jp@gmail.com</a>
+  </div>
+</section>
+
+<!-- ============ フッター ============ -->
+<footer>
+  <div class="wrap">
+    <div class="fm">Lunard</div>
+    <div class="cp">© 2026 Lunard</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   オープニング演出の制御
+   ・月と星屑を canvas で描く（画像素材を持たないので軽い）
+   ・4.1秒で終了。SKIPボタン／背景クリックでも終了
+   ・prefers-reduced-motion の人には最初から見せない
+   ============================================================ */
+(function(){
+  var opening = document.getElementById('opening');
+  if(!opening) return;
+
+  // モーションを控える設定の人だけスキップ（それ以外はリロードのたびに再生）
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.body.classList.add('op-done');
+    return;
+  }
+  document.body.classList.add('op-playing');
+
+  /* ---------- 月の地形データ ----------
+     座標は月の半径を1とした中心からの相対値。
+     クレーター: r=大きさ / d=深さ（陰影の濃さの係数）    */
+  var CRATERS = [
+    {x:.28,  y:.42,  r:.115, d:1.00},  // 目立つ大きめ（ティコ的）
+    {x:-.34, y:.30,  r:.085, d:.80},
+    {x:.44,  y:-.18, r:.075, d:.70},
+    {x:-.06, y:-.46, r:.062, d:.62},
+    {x:-.52, y:-.08, r:.055, d:.55},
+    {x:.10,  y:.66,  r:.050, d:.60},
+    {x:.58,  y:.30,  r:.045, d:.50},
+    {x:-.20, y:.66,  r:.040, d:.45},
+    {x:.30,  y:-.52, r:.036, d:.42},
+    {x:-.62, y:.36,  r:.032, d:.40},
+    {x:.66,  y:-.40, r:.030, d:.38},
+    {x:-.40, y:-.56, r:.026, d:.34}
+  ];
+  // 海（暗い模様）。rx/ry=つぶれ具合 / a=濃さ
+  var MARIA = [
+    {x:-.26, y:-.34, rx:.42, ry:.30, a:.34},   // 静かの海あたり
+    {x:.16,  y:-.44, rx:.30, ry:.34, a:.30},
+    {x:-.34, y:.06,  rx:.34, ry:.24, a:.30},
+    {x:.06,  y:-.10, rx:.26, ry:.30, a:.26},
+    {x:.34,  y:-.06, rx:.22, ry:.18, a:.20},
+    {x:-.10, y:.30,  rx:.20, ry:.16, a:.16},
+    {x:-.50, y:-.16, rx:.20, ry:.22, a:.18}
+  ];
+
+  /* ---------- 月を描く（光源は左上） ---------- */
+  function drawMoon(){
+    var el = document.getElementById('moon');
+    if(!el) return;
+    var dpr = window.devicePixelRatio || 1;
+    var css = el.clientWidth || 132;
+    var S = Math.round(css * dpr * 2);      // 拡大しても粗くならないよう2倍で描く
+    el.width = S; el.height = S;
+    var c = el.getContext('2d'), R = S/2;
+    c.clearRect(0,0,S,S);
+
+    // 円の内側だけに描く
+    c.save();
+    c.beginPath(); c.arc(R,R,R,0,6.284); c.clip();
+
+    // 地の球体
+    var base = c.createRadialGradient(R*0.70, R*0.64, R*0.05, R, R, R*1.08);
+    base.addColorStop(0,   '#FFFEF9');
+    base.addColorStop(0.42,'#F7F2E3');
+    base.addColorStop(0.74,'#E5DCC4');
+    base.addColorStop(1,   '#CDC2A6');
+    c.fillStyle = base;
+    c.fillRect(0,0,S,S);
+
+    // 海（ぼかした暗い斑）
+    c.save();
+    c.filter = 'blur(' + (R*0.10) + 'px)';
+    MARIA.forEach(function(m){
+      c.save();
+      c.translate(R + m.x*R, R + m.y*R);
+      c.scale(m.rx, m.ry);
+      var g = c.createRadialGradient(0,0,0,0,0,R);
+      g.addColorStop(0,   'rgba(104,101,92,' + m.a + ')');
+      g.addColorStop(0.55,'rgba(104,101,92,' + (m.a*0.70) + ')');
+      g.addColorStop(1,   'rgba(104,101,92,0)');
+      c.fillStyle = g;
+      c.beginPath(); c.arc(0,0,R,0,6.284); c.fill();
+      c.restore();
+    });
+    c.restore();
+
+    // クレーター（窪みとして陰影をつける: 光は左上→内壁の左上が影・右下が明るい）
+    CRATERS.forEach(function(k){
+      var cx = R + k.x*R, cy = R + k.y*R, rad = k.r*R;
+      // 内側の陰影
+      c.save();
+      c.beginPath(); c.arc(cx,cy,rad,0,6.284); c.clip();
+      var lin = c.createLinearGradient(cx-rad, cy-rad, cx+rad, cy+rad);
+      lin.addColorStop(0,   'rgba(88,83,70,'  + (0.30*k.d) + ')');
+      lin.addColorStop(0.45,'rgba(120,114,97,'+ (0.10*k.d) + ')');
+      lin.addColorStop(1,   'rgba(255,253,243,'+ (0.30*k.d) + ')');
+      c.fillStyle = lin;
+      c.fillRect(cx-rad, cy-rad, rad*2, rad*2);
+      c.restore();
+      // 外側の縁（左上が明るく盛り上がる）
+      c.save();
+      c.lineWidth = Math.max(0.6, rad*0.16);
+      c.strokeStyle = 'rgba(255,254,246,' + (0.34*k.d) + ')';
+      c.beginPath(); c.arc(cx,cy,rad*1.02, Math.PI*0.75, Math.PI*1.75); c.stroke();
+      c.lineWidth = Math.max(0.5, rad*0.12);
+      c.strokeStyle = 'rgba(96,90,76,' + (0.16*k.d) + ')';
+      c.beginPath(); c.arc(cx,cy,rad*1.02, Math.PI*1.75, Math.PI*2.75); c.stroke();
+      c.restore();
+    });
+
+    // 表面のざらつき
+    var grain = 90000 * (S/600);
+    for(var i=0;i<grain;i++){
+      var a = Math.random()*6.284, rr = Math.sqrt(Math.random())*R;
+      var px = R + Math.cos(a)*rr, py = R + Math.sin(a)*rr;
+      c.fillStyle = 'rgba(' + (Math.random()<0.5 ? '255,253,244,' : '90,85,72,') + (Math.random()*0.05) + ')';
+      c.fillRect(px, py, 1.2, 1.2);
+    }
+
+    // 縁の落ち込み（リムダークニング）
+    var limb = c.createRadialGradient(R,R,R*0.55, R,R,R);
+    limb.addColorStop(0,  'rgba(70,66,55,0)');
+    limb.addColorStop(0.8,'rgba(70,66,55,0.14)');
+    limb.addColorStop(1,  'rgba(60,56,47,0.42)');
+    c.fillStyle = limb;
+    c.fillRect(0,0,S,S);
+
+    c.restore();
+  }
+
+  /* ---------- 星屑（奥行きのあるボケ・ゆっくり上へ流れる） ---------- */
+  var cv = document.getElementById('stars'), ctx = cv.getContext('2d'), dots = [], raf;
+
+  function sizeStars(){
+    var r = window.devicePixelRatio || 1;
+    cv.width = innerWidth * r; cv.height = innerHeight * r;
+    ctx.setTransform(r,0,0,r,0,0);
+  }
+  function buildStars(){
+    dots = [];
+    var n = Math.min(150, Math.round(innerWidth / 9));
+    for(var i=0;i<n;i++){
+      dots.push({
+        x: Math.random()*innerWidth,
+        y: Math.random()*innerHeight,
+        r: Math.random()*2.6 + .4,
+        a: Math.random()*.5 + .12,
+        vx: (Math.random()-.5)*.12,
+        vy: -(Math.random()*.16 + .04),
+        blur: Math.random()*3
+      });
+    }
+  }
+  function drawStars(){
+    ctx.clearRect(0,0,innerWidth,innerHeight);
+    for(var i=0;i<dots.length;i++){
+      var d = dots[i];
+      d.x += d.vx; d.y += d.vy;
+      // 画面外へ出た星は反対側へ回り込ませる
+      if(d.y < -8){ d.y = innerHeight + 8; d.x = Math.random()*innerWidth; }
+      if(d.x < -8) d.x = innerWidth + 8;
+      if(d.x > innerWidth + 8) d.x = -8;
+      var g = ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r + d.blur);
+      g.addColorStop(0,'rgba(248,244,232,'+d.a+')');
+      g.addColorStop(1,'rgba(248,244,232,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(d.x,d.y,d.r + d.blur,0,6.284); ctx.fill();
+    }
+    raf = requestAnimationFrame(drawStars);
+  }
+
+  /* ---------- 終了処理 ---------- */
+  function finish(){
+    cancelAnimationFrame(raf);
+    document.body.classList.remove('op-playing');
+    document.body.classList.add('op-done');
+  }
+
+  // 起動
+  drawMoon();
+  sizeStars(); buildStars(); drawStars();
+
+  addEventListener('resize', drawMoon);
+  addEventListener('resize', function(){ sizeStars(); buildStars(); });
+
+  setTimeout(finish, 4100);
+  opening.querySelector('.op-skip').addEventListener('click', finish);
+  opening.addEventListener('click', function(e){ if(e.target === opening) finish(); });
+})();
+</script>
+
+</body>
+</html>
