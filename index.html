@@ -6,7 +6,7 @@
 
 <title>Lunard（ルナール）</title>
 <meta name="description" content="Lunard（ルナール）— サロンの数字と、お店の顔をつくる。売上分析AI「Salon Adviser」の開発と、店舗の公式サイト制作。">
-<link rel="canonical" href="https://lunard-jp.netlify.app/">
+<link rel="canonical" href="https://tagyukidaruru-cloud.github.io/lunard/">
 
 <!-- ファビコン（SVG優先・非対応ブラウザはPNGへフォールバック） -->
 <link rel="icon" type="image/svg+xml" href="assets/Lunard_mark.svg">
@@ -19,15 +19,15 @@
 <meta property="og:site_name" content="Lunard">
 <meta property="og:title" content="Lunard（ルナール）">
 <meta property="og:description" content="お店と会社の、数字と見た目をつくる。売上分析AI「Salon Adviser」の開発と、公式サイト制作。">
-<meta property="og:url" content="https://lunard-jp.netlify.app/">
-<meta property="og:image" content="https://lunard-jp.netlify.app/assets/ogp.png">
+<meta property="og:url" content="https://tagyukidaruru-cloud.github.io/lunard/">
+<meta property="og:image" content="https://tagyukidaruru-cloud.github.io/lunard/assets/ogp.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Lunard（ルナール）">
 <meta name="twitter:description" content="お店と会社の、数字と見た目をつくる。売上分析AI「Salon Adviser」の開発と、公式サイト制作。">
-<meta name="twitter:image" content="https://lunard-jp.netlify.app/assets/ogp.png">
+<meta name="twitter:image" content="https://tagyukidaruru-cloud.github.io/lunard/assets/ogp.png">
 
 <style>
 /* ============================================================
@@ -435,10 +435,9 @@ footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:1
   try{
     if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   }catch(e){}
-  var seen = false;
-  try{ seen = sessionStorage.getItem('lunard-open') === '1'; }catch(e){}
-  try{ sessionStorage.setItem('lunard-open','1'); }catch(e){}
-  r.className = (r.className ? r.className + ' ' : '') + (seen ? 'op-short' : 'op-full');
+  /* CEO指示 2026-07-24: 月と狐の全編を「毎回」再生する（リロードで尻尾だけ＝短縮版になる挙動をやめる）。
+     長い場合は全編内の SKIP ボタン／画面クリックで飛ばせる。 */
+  r.className = (r.className ? r.className + ' ' : '') + 'op-full';
 })();
 </script>
 </head>
