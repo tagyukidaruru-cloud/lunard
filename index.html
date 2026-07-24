@@ -354,6 +354,55 @@ dl.corp .mailmini:hover{border-bottom-color:var(--bordeaux);}
 .mail{font-family:Didot,"Bodoni 72","Times New Roman",serif; font-size:18px; letter-spacing:.06em; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:3px;}
 .mail:hover{border-bottom-color:var(--bordeaux);}
 
+/* ---------- 実績（Works） ---------- */
+/* 見出し下の一言（正直運用） */
+.works-lead{font-size:15px; letter-spacing:.03em; margin:0 0 34px; color:var(--ink);}
+.works-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px 24px;}
+.work-card{margin:0;}
+/* サムネイル枠。中身は自己完結のプレースホルダーSVG（実物スクショで差し替え） */
+.work-thumb{
+  border-radius:11px; overflow:hidden;
+  box-shadow:0 2px 14px rgba(42,39,36,.07), 0 0 0 1px rgba(229,224,216,.9);
+  background:var(--cream);
+}
+.work-thumb img,
+.work-thumb svg.ph{display:block; width:100%; height:auto;}
+.work-card figcaption{padding:16px 2px 0;}
+.work-tag{
+  display:block; font-size:12px; letter-spacing:.2em; color:var(--bordeaux);
+  margin-bottom:8px;
+}
+.work-tag .wip{color:var(--gray); letter-spacing:.14em; font-size:11px;}
+.work-note{font-size:14px; line-height:1.9; margin:0; color:var(--ink);}
+/* 本文中の控えめな相談導線（うるさくしない） */
+.works-cta{margin:30px 0 0; text-align:center;}
+.link-consult{
+  display:inline-block; font-size:13px; letter-spacing:.12em; color:var(--bordeaux);
+  text-decoration:none; border-bottom:1px solid rgba(107,45,53,.35); padding-bottom:3px;
+}
+.link-consult:hover{border-bottom-color:var(--bordeaux);}
+
+/* ---------- CTA / 料金の手がかり（お問い合わせ） ---------- */
+.price-hint{
+  font-size:14px; line-height:1.95; color:var(--ink);
+  background:rgba(107,45,53,.05);
+  border-left:2px solid rgba(107,45,53,.4);
+  border-radius:0 8px 8px 0;
+  padding:14px 18px; margin:0 0 26px;
+}
+.price-hint strong{color:var(--bordeaux); font-weight:400;}
+.btn-consult{
+  display:inline-flex; align-items:center; gap:.55em;
+  background:var(--bordeaux); color:#FDFCFA; text-decoration:none;
+  font-size:15px; letter-spacing:.14em;
+  padding:15px 34px; border-radius:999px;
+  box-shadow:0 6px 20px rgba(107,45,53,.20);
+  transition:transform .3s cubic-bezier(0.16,1,0.3,1), box-shadow .3s ease;
+}
+.btn-consult::before{content:"✉"; font-size:14px; opacity:.9;}
+.btn-consult:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(107,45,53,.30);}
+.contact .mail{display:inline-block; margin-top:22px;}
+
 /* ---------- フッター ---------- */
 footer{padding:52px 0 64px; text-align:center; border-top:1px solid var(--line);}
 footer .fm{font-family:Didot,"Bodoni 72","Times New Roman",serif; font-size:15px; letter-spacing:.3em; color:var(--gray);}
@@ -373,6 +422,7 @@ footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:1
    ============================================================ */
 @media(max-width:760px){
   .reasons{grid-template-columns:1fr; gap:34px;}
+  .works-grid{grid-template-columns:1fr; gap:26px;}
   .idx{display:none;}   /* 現在地インジケータはモバイルでは出さない */
 }
 @media(max-width:600px){
@@ -395,6 +445,8 @@ footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:1
   .intro-band > .wrap{padding-top:22px; padding-bottom:22px;}
   .intro-band .lead{font-size:15px;}
   .system .accent{font-size:16px; padding-left:14px;}
+  /* CTAボタンはスマホで押しやすく（幅いっぱい・中央） */
+  .btn-consult{display:flex; justify-content:center; width:100%; padding:16px 20px; letter-spacing:.1em;}
   /* オープニング */
   .moon{width:86px; height:86px; top:16%; left:58%;}
   .op-mark{width:200px;}
@@ -543,11 +595,12 @@ footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:1
 <nav class="idx" aria-label="セクション">
   <a href="#s1"><span class="lbl">事業</span>01</a>
   <a href="#s2"><span class="lbl">選ばれる理由</span>02</a>
-  <a href="#s3"><span class="lbl">制作体制</span>03</a>
-  <a href="#s4"><span class="lbl">名前について</span>04</a>
-  <a href="#s5"><span class="lbl">代表</span>05</a>
-  <a href="#s6"><span class="lbl">会社概要</span>06</a>
-  <a href="#s7"><span class="lbl">お問い合わせ</span>07</a>
+  <a href="#sw"><span class="lbl">実績</span>03</a>
+  <a href="#s3"><span class="lbl">制作体制</span>04</a>
+  <a href="#s4"><span class="lbl">名前について</span>05</a>
+  <a href="#s5"><span class="lbl">代表</span>06</a>
+  <a href="#s6"><span class="lbl">会社概要</span>07</a>
+  <a href="#s7"><span class="lbl">お問い合わせ</span>08</a>
 </nav>
 
 <!-- ============ 導入 ============ -->
@@ -612,6 +665,90 @@ footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:1
   </div>
 </section>
 
+<!-- ============================================================
+     実績（Works）
+     ▼ 実物への差し替え手順（掲載許諾が取れたカードから1枚ずつ・最小手数）
+       1) スクショ画像を assets/works/ に置く（例: assets/works/実績1.png。推奨 16:10・幅640px以上）
+       2) 該当カードの「SWAP:実績N」コメント直下の <svg class="ph">…</svg> を丸ごと
+          <img src="assets/works/実績1.png" alt="○○の制作事例"> に置き換える（ここ1箇所だけ）
+       3) 業種ラベル（.work-tag）と一言（.work-note）を実物に合わせて更新し「※準備中」を外す
+     ※現時点は掲載許諾が未取得のため、外部画像を使わない自己完結プレースホルダーで表示中。
+     ============================================================ -->
+<section id="sw">
+  <div class="wrap">
+    <h2>実績</h2>
+    <p class="works-lead">実際の制作事例は、掲載の準備が整い次第、順次公開します。まずは私たちのつくり方を、この一枚ずつでお伝えします。</p>
+
+    <div class="works-grid">
+
+      <!-- SWAP:実績1 サムネ=assets/works/実績1.png 業種=不動産会社 一言=会社の顔となる一枚を、信頼が伝わる設計で。 -->
+      <figure class="work-card">
+        <div class="work-thumb">
+          <svg class="ph" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="サイトイメージ準備中">
+            <rect width="320" height="200" fill="#FDFCFA"/>
+            <rect x="0" y="0" width="320" height="34" fill="#F3EFE8"/>
+            <circle cx="18" cy="17" r="4" fill="#D9BCBE"/><circle cx="34" cy="17" r="4" fill="#E5E0D8"/><circle cx="50" cy="17" r="4" fill="#E5E0D8"/>
+            <rect x="70" y="10" width="228" height="15" rx="7.5" fill="#FAF8F4" stroke="#E5E0D8"/>
+            <rect x="24" y="54" width="120" height="12" rx="3" fill="#E5E0D8"/>
+            <rect x="24" y="74" width="180" height="8" rx="4" fill="#EDE8E0"/>
+            <rect x="24" y="88" width="150" height="8" rx="4" fill="#EDE8E0"/>
+            <rect x="228" y="52" width="68" height="46" rx="5" fill="#F1ECE3"/>
+            <text x="160" y="150" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',serif" font-size="13" letter-spacing="3" fill="#B8B2A9">サイトイメージ準備中</text>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="work-tag">不動産会社 <span class="wip">※準備中</span></span>
+          <p class="work-note">会社の「顔」となる一枚を、信頼が伝わる設計で制作しています。</p>
+        </figcaption>
+      </figure>
+
+      <!-- SWAP:実績2 サムネ=assets/works/実績2.png 業種=カフェ 一言=お店の世界観そのままに、来店につながる一枚を。 -->
+      <figure class="work-card">
+        <div class="work-thumb">
+          <svg class="ph" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="サイトイメージ準備中">
+            <rect width="320" height="200" fill="#FDFCFA"/>
+            <rect x="0" y="0" width="320" height="34" fill="#F3EFE8"/>
+            <circle cx="18" cy="17" r="4" fill="#D9BCBE"/><circle cx="34" cy="17" r="4" fill="#E5E0D8"/><circle cx="50" cy="17" r="4" fill="#E5E0D8"/>
+            <rect x="70" y="10" width="228" height="15" rx="7.5" fill="#FAF8F4" stroke="#E5E0D8"/>
+            <rect x="24" y="52" width="272" height="46" rx="5" fill="#F1ECE3"/>
+            <rect x="24" y="108" width="80" height="8" rx="4" fill="#EDE8E0"/>
+            <rect x="112" y="108" width="80" height="8" rx="4" fill="#EDE8E0"/>
+            <rect x="200" y="108" width="80" height="8" rx="4" fill="#EDE8E0"/>
+            <text x="160" y="152" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',serif" font-size="13" letter-spacing="3" fill="#B8B2A9">サイトイメージ準備中</text>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="work-tag">カフェ <span class="wip">※準備中</span></span>
+          <p class="work-note">お店の世界観そのままに、来店につながる一枚をつくります。</p>
+        </figcaption>
+      </figure>
+
+      <!-- SWAP:実績3 サムネ=assets/works/実績3.png 業種=パン屋 一言=毎日の魅力が伝わる、更新しやすいサイトを。 -->
+      <figure class="work-card">
+        <div class="work-thumb">
+          <svg class="ph" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="サイトイメージ準備中">
+            <rect width="320" height="200" fill="#FDFCFA"/>
+            <rect x="0" y="0" width="320" height="34" fill="#F3EFE8"/>
+            <circle cx="18" cy="17" r="4" fill="#D9BCBE"/><circle cx="34" cy="17" r="4" fill="#E5E0D8"/><circle cx="50" cy="17" r="4" fill="#E5E0D8"/>
+            <rect x="70" y="10" width="228" height="15" rx="7.5" fill="#FAF8F4" stroke="#E5E0D8"/>
+            <rect x="24" y="52" width="82" height="60" rx="5" fill="#F1ECE3"/>
+            <rect x="119" y="52" width="82" height="60" rx="5" fill="#F1ECE3"/>
+            <rect x="214" y="52" width="82" height="60" rx="5" fill="#F1ECE3"/>
+            <text x="160" y="150" text-anchor="middle" font-family="'Hiragino Mincho ProN','Yu Mincho',serif" font-size="13" letter-spacing="3" fill="#B8B2A9">サイトイメージ準備中</text>
+          </svg>
+        </div>
+        <figcaption>
+          <span class="work-tag">パン屋 <span class="wip">※準備中</span></span>
+          <p class="work-note">毎日の魅力が伝わる、更新しやすいサイトをつくります。</p>
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <p class="works-cta"><a class="link-consult" href="mailto:lunard.jp@gmail.com?subject=Lunard%E3%81%B8%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">無料でご相談する</a></p>
+  </div>
+</section>
+
 <!-- ============ 制作体制 ============ -->
 <section id="s3" class="system">
   <div class="wrap">
@@ -670,6 +807,8 @@ footer .cp{font-size:11px; color:var(--gray); letter-spacing:.08em; margin-top:1
   <div class="wrap">
     <h2>お問い合わせ</h2>
     <p>サービスのご相談、お見積り、その他のご連絡はメールからお願いいたします。数日以内にご返信します。</p>
+    <p class="price-hint">料金は内容に応じてお見積りします。<strong>初回のご相談は無料です。</strong>ご予算に合わせたプランもご用意しています。まずはお気軽にご連絡ください。</p>
+    <a class="btn-consult" href="mailto:lunard.jp@gmail.com?subject=Lunard%E3%81%B8%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a>
     <a class="mail" href="mailto:lunard.jp@gmail.com">lunard.jp@gmail.com</a>
   </div>
 </section>
@@ -1108,7 +1247,7 @@ var boost = 0;   // スクロール由来の加速量（3)と共有）
       if(!w) return;
       var items = [];
       [].slice.call(w.children).forEach(function(ch){
-        if(ch.classList.contains('reasons')){ items = items.concat([].slice.call(ch.children)); }
+        if(ch.classList.contains('reasons') || ch.classList.contains('works-grid')){ items = items.concat([].slice.call(ch.children)); }
         else items.push(ch);
       });
       items.forEach(function(el,i){
